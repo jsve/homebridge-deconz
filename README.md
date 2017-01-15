@@ -3,6 +3,60 @@ I'm using a Raspberry Pi running standard raspbian. To talk to zigbee devices su
 
 https://www.dresden-elektronik.de/conbee/
 
+## Installing and configuring deconz
+
+Run:
+```
+wget http://www.dresden-elektronik.de/rpi/deconz/deconz-latest.deb
+sudo dpkg -i deconz-latest.deb
+```
+
+These might not be nessesary, try without first:
+```
+wget http://www.dresden-elektronik.de/rpi/deconz-dev/deconz-dev-latest.deb
+sudo dpkg -i deconz-dev-latest.deb
+``
+
+## Starting deCONZ
+The software can be started either from the "Programming -> deCONZ" on the raspberry, or through
+
+```
+deCONZ --auto-connect=1 --http-port=8089
+```
+
+in the terminal (must be running in terminal window or on vnc, not SSH)
+
+making autoconnect work:
+https://raspberry.tips/hausautomatisierung/raspberry-pi-lichsteuerung/
+
+Like the link says, run this:
+
+```
+mkdir ~/.config/autostart
+sudo nano ~/.config/autostart/deCONZ.desktop
+```
+
+Then we add these lines:
+```
+[Desktop Entry]
+Type=Application
+Exec=deCONZ-autostart.sh
+``
+
+The autostart script needs to be changed to add the port-selection flag. We can do this with a nifty sed command:
+```
+sudo sed -ie 's/OPTIONS="--auto-connect=1 --dbg-error=1"/OPTIONS="--auto-connect=1 --http-port=8089 --dbg-error=1"/' /usr/bin/deCONZ-autostart.sh
+```
+
+### TL;DR
+We can do the above in one go with:
+```
+mkdir ~/.config/autostart
+sudo echo $'[Desktop Entry]\nType=Application\nExec=deCONZ-autostart.sh' > ~/.config/autostart/deCONZ.desktop
+sudo sed -ie 's/OPTIONS="--auto-connect=1 --dbg-error=1"/OPTIONS="--auto-connect=1 --http-port=8089 --dbg-error=1"/' /usr/bin/deCONZ-autostart.sh
+```
+
+
 ## Finding and signing on to the gateway's web-interface
 Using
 
@@ -19,21 +73,16 @@ I've had different experiences when trying to add devices. Sometimes I need to a
 Once added, I've been using the web-interface to add the device to the proper group.
 
 
+
 ## Documentation
+
+### deCONZ program
+For some reason this seems to add alot of valuable information
+
+https://www.dresden-elektronik.de/fileadmin/Downloads/Dokumente/Produkte/ZLL/RaspBee-BHB-en.pdf
+
+### REST API
 The API from Dresden elektronik is described in
 
 http://dresden-elektronik.github.io/deconz-rest-doc/
 
-## Installing and configuring deconz
-
-Run:
-```
-wget http://www.dresden-elektronik.de/rpi/deconz/deconz-latest.deb
-sudo dpkg -i deconz-latest.deb
-```
-
-These might not be nessesary, try without first:
-```
-wget http://www.dresden-elektronik.de/rpi/deconz-dev/deconz-dev-latest.deb
-sudo dpkg -i deconz-dev-latest.deb
-``
