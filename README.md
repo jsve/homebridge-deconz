@@ -41,7 +41,7 @@ Then we add these lines:
 [Desktop Entry]
 Type=Application
 Exec=deCONZ-autostart.sh
-``
+```
 
 The autostart script needs to be changed to add the port-selection flag. We can do this with a nifty sed command:
 ```
@@ -81,8 +81,21 @@ For some reason this seems to add alot of valuable information
 
 https://www.dresden-elektronik.de/fileadmin/Downloads/Dokumente/Produkte/ZLL/RaspBee-BHB-en.pdf
 
+#### Magic flags that have no documentation
+--dbg-<type>=<level> (as described: https://github.com/dresden-elektronik/deconz-rest-plugin/issues/5)
+
 ### REST API
 The API from Dresden elektronik is described in
 
 http://dresden-elektronik.github.io/deconz-rest-doc/
 
+Code here:
+
+https://github.com/dresden-elektronik/deconz-rest-plugin/blob/b8393233a76fadf28a796f626c3aef428fbd4a47/de_web_plugin.cpp
+
+
+### deCONZ API (C++)
+https://www.dresden-elektronik.de/fileadmin/Downloads/Dokumente/Produkte/6_Software/deconz-cpp-doc/d8/d50/dbg__trace_8h_source.html
+
+### Other plugins
+There are not many, but this: https://hcm-lab.de/git/project/deconz-push/tree/master Seems to give listeners to deCONZ. Doesn't work with remotes, as far as I can see though.

@@ -1,0 +1,30 @@
+{
+  "name": "homebridge-Tellstick",
+  "version": "0.0.1",
+  "description": "Tellstick (Telldus Tellstick Duo) Platform plugin for homebridge: https://github.com/nfarina/homebridge built on a mac, for deployment on a Raspberry Pi",
+  "license": "ISC",
+  "keywords": [
+    "homebridge-plugin",
+    "Telldus",
+    "Tellstick",
+    "home automation",
+    "homebridge"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jsve/homebridge-tellstick.git"
+  },
+  "dependencies": {
+    "lowdb": "^0.15.5",
+    "telldus": "^1.1.2"
+  },
+  "engines": {
+    "homebridge": ">=0.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.2",
+    "eslint-plugin-standard": "^2.0.1"
+  }
+}
